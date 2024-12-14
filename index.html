@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: black;
+            color: rgb(154, 152, 152);
+            height: 100vh;
+        }
+        .card1, .card2, .card3 {
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 20px;
+            border: 2px solid black;
+            background-color: rgb(67, 67, 67);
+        }
+        .card1 {
+            height: 8rem;
+            width: 20rem;
+        }
+        .card1 ul li {
+            list-style: none;
+            font-size: larger;
+            margin-block: 1rem;
+            display: flex;
+            column-gap: 2rem;
+            cursor: pointer;
+        }
+        .card2 {
+            height: 30rem;
+            width: 20rem;
+        }
+        .card2 ul li {
+            list-style: none;
+            font-size: larger;
+            margin-block: 1.8rem;
+            display: flex;
+            column-gap: 1.5rem;
+            text-align: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+        }
+        .imgwithborder {
+            border-radius: 30px;
+        }
+        .card3 {
+            height: 50rem;
+            width: 100%;
+            border: 2px solid black;
+        }
+        .container {
+            display: flex;
+            column-gap: 20px;
+        }
+        .library-container {
+            flex-direction: column;
+        }
+        .cardio {
+            height: 9rem;
+            width: 140px;
+            row-gap: 20px;
+            column-gap: 20px;
+        }
+        .cardiofather {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 50px;
+            column-gap: 50px;
+            margin-top: 25px;
+            object-fit: contain;
+        }
+        .cardio img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        .ab p {
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+        .ab p:hover {
+            color: red;
+            font-size: larger;
+            transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition-duration: 2s;
+        }
+        .mediaplayer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            filter: invert(1);
+            background: #e2d9d9;
+            border-radius: 10px;
+            width: 100vw;
+            min-height: 40px;
+            padding: 12px;
+        }
+        .songbuttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 5px;
+            position: relative;
+    /* right: 1px; */
+    left: 6rem;
+        }
+        .songbuttons #previous{
+            margin: 8px;
+        }
+        .volume {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            position: relative;
+            top: 1rem;
+        }
+        .range input {
+            cursor: pointer;
+        }
+        .card2 ul li:hover {
+            border: 2px solid rgb(40, 40, 40);
+        }
+        .card1 ul li:hover {
+            color: white;
+        }
+        .seekbar {
+    height: 4px;
+    width: 50%;
+    background: black;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 8px;
+    margin: 6px;
+    cursor: pointer;
+}
+.songtime {
+    width: 125px;
+    color: black;
+    padding: 0 12px;
+    position: relative;
+    left: 300px;
+}
+
+.circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    background-color: black;
+    position: relative;
+    bottom: 5px;
+    left: 0%;
+    transition: left 0.5s;
+}
+.songinfo {
+    color: black;
+    padding: 0 12px;
+    width: 250px;
+}
+.hamburger {
+    display: none;
+    cursor: pointer;
+    
+
+}
+.abovebar {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.hamburgerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+   
+}
+@media(min-width:1200px){
+    .close {
+    display: none;
+}
+}
+@media (max-width: 1200px) {
+    .library-container {
+        position: absolute;
+        left: -130%;
+        transition: all .3s;
+        z-index: 1;
+        width: 373px;
+        background-color: black;
+        padding: 0;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+    }
+    .hamburger{
+    display: block;
+}
+.close {
+        display: block;
+    }
+.card3 h2{
+    margin-inline: 5rem;
+}
+
+
+    
+ 
+    
+}
+.close {
+    position: absolute;
+    /* right: -322px; */
+    padding: 0px 2rem 0px 17rem;
+    top: 30px;
+    width: 29px;
+    }
+.nav{
+    display: flex;
+    position: absolute;
+    
+    /* padding: 12px 0px 0px 20px; */
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="nav">
+    <div class="hamburgerContainer">
+
+        <img width="40" class="invert hamburger" src="hamburger.svg" alt="">
+        <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M15 6L9.70711 11.2929C9.37377 11.6262 9.20711 11.7929 9.20711 12C9.20711 12.2071 9.37377 12.3738 9.70711 12.7071L15 18"
+                stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg> -->
+        <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M9 18L14.2929 12.7071C14.6262 12.3738 14.7929 12.2071 14.7929 12C14.7929 11.7929 14.6262 11.6262 14.2929 11.2929L9 6"
+                stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg> -->
+    </div>
+    
+</div>
+    <div class="container">
+        <div class="library-container">
+            <div class="close">
+                <img width="30" class="invert" src="close.svg" alt="">
+            </div>
+            <div class="card card1">
+                <ul>
+                    <li id="Home">
+                        <img src="icons8-home-24 (1).png" alt="" width="25rem"> Home
+                    </li>
+                    <li id="search">
+                        <img src="search.png" alt="" width="25rem"> Search
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card card2">
+                <h2>Your Library</h2>
+                <ul>
+                    <li><img src="icons8-spotify-24.png" alt="" width="50rem"> Your Liked Songs</li>
+                    <li><img src="krsna image.jpg" alt="" width="50rem" class="imgwithborder"> KR$NA</li>
+                    <li><img src="yoyo.jpg" alt="" width="50rem" class="imgwithborder"> Yo Yo Honey Singh</li>
+                    <li><img src="weekend.jpg" alt="" width="50rem"> The Weekend</li>
+                    <li><img src="collage.jpg" alt="" width="50rem"> My Playlist #1</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card card3">
+            <h2>SPOTIFY</h2>
+            <div class="cardiofather">
+                <div class="ab cardio">
+                    <img src="afsanay.jpg" alt="">
+                    <p id="#jodd">Afsanay</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="shutup.jpg" alt="">
+                    <p>Shut Up</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="https://i.ytimg.com/vi/oE7lU2qj4rY/maxresdefault.jpg" alt="">
+                    <p>Wishes</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+                <div class="ab cardio">
+                    <img src="ab67616d0000b273d9a129c4a656a55afff2ca02.jpg" alt="">
+                    <p>Brown Munde</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aboveba">
+   
+    <div class="mediaplayer">
+        <div class="songinfo"></div>
+        <div class="songbuttons">
+            <img width="35" id="previous" src="prevsong.svg" alt="">
+            <img width="35" id="play" src="play.svg" alt="">
+            <img width="35" id="next" src="nextsong.svg" alt="">
+        </div>
+        <div class="seekbar">
+            <div class="circle">
+
+            </div>
+        </div>
+        <div class="songtime"></div>
+        <div class="volume">
+            <img width="25" src="volume.svg" alt="">
+            <div class="range">
+                <input type="range" name="volume" id="">
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
